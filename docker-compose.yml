@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  transmission:
+    container_name: transmission
+    image: shaneisrael/fireshare
+    environment:
+      - ADMIN_PASSWORD=password
+      - TZ=Asia/Kuching
+      - PUID=1026
+      - PGID=100
+    volumes:
+      - /data/fireshare:/data:rw
+      - /data/fireshare/processing:/processed:rw
+      - /data/fireshare/video:/videos:rw
+    ports:
+      - 80:80
+    mem_limit: 8g
+    cpu_shares: 768
+    security_opt:
+      - no-new-privileges:true
+    restart: on-failure:5
